@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="usstProjectMarket"
+  id="myeclipse.1311080743484"
+  context-root="/usstProjectMarket"
+  j2ee-spec="5.0"
+  archive="usstProjectMarket.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

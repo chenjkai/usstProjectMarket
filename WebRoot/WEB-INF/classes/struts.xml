@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+	<!--下述语句是将struts2交给spring管理 -->
+ 	<constant name="struts.objectFactory" value="spring" />
+ 	<constant name="struts.i18n.encoding" value="GBK"></constant>
+ 	<constant name="struts.ui.theme" value="simple" />
+ 	<constant name="struts.multipart.maxSize" value="10485760" />
+ 	
+ 	<!--导入struts-default.xml文件 -->
+ 	<include file="struts-default.xml"></include>
+ 	<!-- 全局跳转 -->
+ 	<package name="pubResult" extends="struts-default" abstract="true">
+		<global-results>
+			<result name="login">login.jsp</result>
+			<result name="home" type="redirectAction">home.action</result>
+		</global-results>
+	</package> 
+ 	
+ 	<!--将action内容放在package元素下，package元素的name值与extends值可以使用默认值，如下所示 -->
+	<package name="need-not-login" extends="struts-default">
+		<interceptors>
+			<interceptor name="projectRelationCheckerInterceptor" class="projectRelationCheckerInterceptor"></interceptor>
+		</interceptors>
+		<!-- 显示注册页 -->
+		<action name="showRegister" class="userAction" method="getInformationBeforeReg">
+			<result name="show">register.jsp</result>
+		</action>
+		<!-- 注册服务 -->
+		<action name="register" class="userRegisterAction" method="register">
+			<result name="success" type="redirectAction">home.action</result>
+			<result name="register">register.jsp</result>
+		</action>
+		
+		<!-- 登录 -->
+		<action name="login" class="userLoginAction" method="userLogin">
+		</action>
+		
+		<!-- 注销 -->
+		<action name="logout" class="userLogoutAction" method="logOut">
+			<result name="success" type="redirectAction">home.action</result>
+		</action>
+		
+		<!-- 得到一级菜单 -->
+		<action name="getFirstMenuList" class="getMenuListAction" method="getFirstList">
+			
+		</action>
+		
+		<!-- 得到二级菜单 -->
+		<action name="getSecondMenuList" class="getMenuListAction" method="getSecondListByFirstListId">
+			
+		</action>
+		
+		<!-- 得到项目列表 -->
+		<action name="showprojects" class="com.usstprojectmarket.action.ProjectAction" method="getProjectsBySecondListId">
+			<result name="show">projects.jsp</result>
+		</action>
+		
+		<!-- 显示具体的项目信息-->
+		<action name="showProject" class="com.usstprojectmarket.action.ProjectAction" method="getProjectByProjectId">
+			<result name="show">project.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="projectRelationCheckerInterceptor"></interceptor-ref>
+		</action>
+		<!--根据学校id获得学院列表 -->
+		<action name="getCollegeBySchool" class="userAction" method="getCollegeBySchool">
+		</action>
+		<!-- 根据教师ID验证，该教师是否存在 -->
+		<action name="validateTeacherById" class="userAction" method="validateTeacherById">
+		</action>
+		<!-- 验证用户名是否重名 -->
+		<action name="validateRename" class="userAction" method="validateRename">
+		</action>
+		<!-- 取得最新发布的项目-->
+		<action name="home" class="homeAction" method="home">
+			<result name="home">home.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 登录后才能进行的操作 -->
+	<package name="need-login" extends="pubResult">
+	
+		<interceptors>
+			<interceptor name="companyChecker" class="com.usstprojectmarket.filter.CompanyCheckerInterceptor"></interceptor>
+			<interceptor name="loginChecker" class="com.usstprojectmarket.filter.LoginCheckInterceptor"></interceptor>
+			<interceptor name="projectRelationCheckerInterceptor" class="projectRelationCheckerInterceptor"></interceptor>
+		</interceptors>
+		
+		
+		<!-- 保存项目 -->
+		<action name="saveProject" class="com.usstprojectmarket.action.ProjectAction" method="saveProject">
+			<result name="success">index.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="companyChecker"></interceptor-ref>
+		</action>
+		<!-- 投标 -->
+		<action name="vote" class="voteAction" method="vote">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<!-- 取消投标 -->
+		<action name="unVote" class="voteAction" method="unVote">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+		<!-- 删除项目 -->
+		<action name="deleteProject" class="projectManageAction" method="deleteProject">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+		<!-- 显示发布的项目 -->
+		<action name="showPublished" class="projectAction" method="showPublished">
+			<result name="show">published.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="companyChecker"></interceptor-ref>
+		</action>
+		<!-- 显示以投标 -->
+		<action name="showVoted" class="projectManageAction" method="showVoted">
+			
+			<result name="show">voted.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="companyChecker"></interceptor-ref>
+		</action>
+		<!--中标 -->
+		<action name="choose" class="projectManageAction" method="choose">
+			
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="companyChecker"></interceptor-ref>
+		</action>
+		<!--取消中标 -->
+		<action name="unChoose" class="projectManageAction" method="unChoose">
+			
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="companyChecker"></interceptor-ref>
+		</action>
+		<!-- 显示附件页 -->
+		<action name="showAttachment" class="projectManageAction" method="showAttachment">
+			
+			<result name="show">attachment.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+		<!--文件上传 -->
+		<action name="upLoad" class="upload" method="upload">
+			<result name="show">uploadsuccess.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+			<interceptor-ref name="fileUpload">
+				<param name="maximumSize">10485760</param>
+			</interceptor-ref>
+		</action>
+		<!-- 文件下载 -->
+		<action name="downLoad" class="com.usstprojectmarket.action.FileDownloadAction">
+			   <result name="success" type="stream"> 
+			   		<param name="contentType">application/octet-stream;charset=gbk</param>
+			   		<param name="inputName">inputStream</param>
+			   		<param name="contentDisposition">attachment;filename="${fileName}"</param>
+			   		<param name="bufferSize">4096</param>  
+			   </result>
+		</action>		
+		<!-- 项目管理，改变项目状态 -->
+		<action name="projectStatusChange" class="projectManageAction" method="changeStatus">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="projectRelationCheckerInterceptor"></interceptor-ref>
+		</action>
+		
+		<!-- 显示用户的详细资料 -->
+		<action name="showUserInfo" class="userManageAction" method="showUserDetail">
+			<result name="professor">teacher_info.jsp</result>
+			<result name="company">company_info.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+		<!-- 显示用户资料修改页 -->
+		<action name="showmodifyinfo" class="userManageAction" method="showChangeUserInfo">
+			<result name="professor">teacher_modify.jsp</result>
+			<result name="company">company_modify.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+		
+		<!-- 显示用户资料修改页 -->
+		<action name="modifyinfo" class="userManageAction" method="modifyInfo">
+			<result name="success">modifysuccess.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="loginChecker"></interceptor-ref>
+		</action>
+	</package>
+	
+	<!--管理员登录后的操作 -->
+	<package name="admin" extends="struts-default">
+		<interceptors>
+			<interceptor name="adminChecker" class="com.usstprojectmarket.filter.AdminLoginCheckInterceptor"></interceptor>
+		</interceptors>
+		<action name="showUserManageRoleChoose" class="projectManageAction" method="showUserManageRoleChoose">
+			<result name="show">admin/userManageRoleChoose.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="showProjectsManage" class="projectManageAction" method="getProjects">
+			<result name="show">admin/projectmanage.jsp</result>
+			
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="changeStatus" class="projectManageAction" method="changeStatus">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="admin" class="adminAction" method="enterBack">
+			<result name="admin">admin/admin.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="showUserWaitActive" class="userManageAction" method="showUserWaitActive">
+			<result name="show">admin/usermanage.jsp</result>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="activeUser" class="userManageAction" method="activeUser">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="lockUser" class="userManageAction" method="lockUser">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="unLockUser" class="userManageAction" method="unLockUser">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+		
+		<action name="deleteUser" class="userManageAction" method="deleteUser">
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="adminChecker"></interceptor-ref>
+		</action>
+	</package>
+	
+</struts>

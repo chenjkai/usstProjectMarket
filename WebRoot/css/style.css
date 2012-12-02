@@ -1,0 +1,653 @@
+@CHARSET "UTF-8";
+/*--------------------------总体布局----------------------*/
+html,body,iframe{
+	
+	margin:0 auto;
+	padding:0px;
+	border:0px;
+	outline:0;
+	font-size:100%;
+	font-style:normal;
+	text-align:center;
+	text-decoration:none;
+}
+
+/*-------------------------body样式-----------------------*/
+body{
+	font-family:"宋体",Arial,Helvetica,sans-serif;
+	font-size:12px;
+	line-height:1.6;
+	color:#333;
+}
+/*--------------------------container样式------------------*/
+
+#container {
+	
+	margin: 0 auto;
+	padding:0px;
+	position:relative;
+	width:1024px;
+	text-align:left
+	z-index:-2;
+}
+
+/*--------------------------header样式------------------*/
+#header {
+	height:100px;
+	width:1024px;
+	text-align:center;
+	background-color:#a2d9ff;
+	z-index:-1;
+	margin:0 auto;
+}
+
+/*--------------------------banner_top样式-------------*/
+#banner_top{
+	height:30px;
+	width:1024px;
+	background-color:#CCCCCC;
+	margin:0 auto;
+	font-size:14px;
+	z-index:10;
+}
+
+#banner_top .left{
+	float:left;
+	left:2px;
+	height:30px;
+	padding-top:5px;
+	padding-left:5px;
+}
+
+#banner_top .right{
+	
+	position:absolute;
+	right:2px;
+	height:30px;
+	z-index:11;
+	padding-top:5px;
+}
+
+/*--------------------------banner_bottom样式-------------*/
+
+
+
+/*--------------------------left样式------------------*/
+
+#left{
+	text-align:center;
+	font-size:12px;
+	width:200px;
+	height:600px; 
+	float:left;
+	z-index:-1;
+	background-color:white;
+	margin-top:2px;
+}
+#left .title{
+	height:	30px;
+	font-size:15px;
+	text-align:center;
+	border-bottom: 1px solid #CCCCCC;
+	color: #000000;
+	font-weight:bold;
+	padding-top:8px;
+}
+
+#left div{
+	width:auto;
+	z-index:0;
+}
+
+#left_top{
+	height:196px;
+	background-image:url(../image/frame.jpg);
+	background-repeat:no-repeat; 
+}
+
+
+#left_top .content{
+	font-size:13px;
+	font-weight:bold;
+	text-algin:left;	
+}
+
+#left_top .content .tip span{
+	display:inline-block;
+	width:100px;
+	text-algin:left;
+}
+
+
+
+#left_mid{
+	height:196px;
+	margin-top:3px;
+	background-image:url(../image/frame.jpg);
+	background-repeat:no-repeat; 
+}
+
+#left_bottom{
+	margin-top:5px;
+}
+
+/*-------------------------content样式 ---------------*/
+
+#content{
+	text-align:center;
+	font-size:12px;
+	width:812px;
+	height:650px; 
+	float:left;
+	margin:2px 0px 2px 12px;
+	z-index:-1;
+}
+
+#content_left_top ul li .right{
+	display:inline-block;
+	float:right;
+}
+
+#content_left_top ul{
+	display:block;
+	float:left;
+}
+
+
+
+
+/*-------------------------position样式---------------*/
+#position{
+	text-align:left;
+	width:812px;
+	height:20px;
+	margin:3px 0px 0px 0px;
+	font-size:13px;
+	padding-left:8px;
+	float:left;
+}
+
+/*-------------------------footer不受float影响 ---------------*/
+#footer{
+	clear:both;				
+	text-align:center;
+	height:70px;
+	z-index:-1;
+	margin:0 auto;
+}
+
+/*-------------------------content内部的div共有样式-----------*/
+
+#content div{
+	border: 1px solid #CCCCCC;
+	text-align:left;
+	width:399px;
+	height:297px;
+	z-index:0;
+}
+#content div .list_title{
+	display:block;
+	width:399px;
+	height:25px;
+	border-bottom: 1px solid #CCCCCC;
+	background-image:url(../image/z_t.jpg);
+  	background-repeat: repeat-x
+}
+
+#content div .list_title .title{
+	display:block;
+	padding-left:5px;
+	float:left;
+}
+#content div .list_title .more{
+	display:inline-block;
+	padding-top:2px;
+	float:right;
+}
+
+#content div .list_title .more img{
+	border:0px;
+}
+#content .list_content{
+	width:390px;
+	height:15px;
+	margin-top:1px;
+	z-index:5;
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	border-bottom: 1px dotted #CCCCCC;
+}
+/*-------------------------搜索栏样式-----------------*/
+
+#search{
+	width:810px;
+	height:30px;
+	border: 1px solid #CCCCCC;
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:12px;
+	float:left;
+	text-align:left;
+	padding-top:3px;
+}
+
+/*-------------------------content_left_top样式-------------*/
+#content_left_top{
+	float:left;
+	
+}
+
+
+#content_left_top .left{
+	display:block;
+	float:left;
+	width:250px;
+	height:15px;
+	padding-left:5px;
+	padding-top:2px;
+}
+
+
+#content_left_top .right{
+	display:inline-block;
+	float:right;
+	width:166.5px
+	height:15px;
+}
+
+
+/*-------------------------content_right_top样式-------------*/
+#content_right_top{
+	margin-left:10px;
+	float:left;
+}
+
+#content_right_top .left{
+	display:block;
+	float:left;
+	width:200px;
+	height:15px;
+	padding-left:5px;
+	padding-top:2px;
+}
+
+
+#content_right_top .right{
+	display:inline-block;
+	float:right;
+	width:166.5px
+	height:15px;
+}
+
+/*-------------------------content_left_bottom样式-------------*/
+#content_left_bottom{
+	float:left;
+	margin-top:5px;
+}
+
+/*-------------------------content_right_bottom样式-------------*/
+#content_right_bottom{
+	float:left;
+	margin-left:10px;	
+	margin-top:5px;
+}
+
+
+/*-------------------------projects样式-------------*/
+
+#projects{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:812px;
+	height:auto; 
+	float:left;
+	margin:2px 0px 2px 10px;
+	z-index:-2;
+	border: 1px solid #CCCCCC;
+	text-align:left;
+}
+
+/*-----------------------projects_top样式---------*/
+#projects #projects_top {
+	height:22px;
+	font-size:14px;
+	border-bottom: 1px solid #CCCCCC;
+	padding-left:3px;
+}
+#projects #projects_top table tr td{
+	font-size:12px;
+	text-align:left;
+}
+
+/*------------项目列表样式----------------------*/
+#content_mid{
+	text-algin:left;
+	font-size:13px;
+	padding-left:3px;
+}
+#content_mid table tr td{
+	font-size:13px;
+	text-align:left;
+}
+
+/*------------分页显示样式----------------------*/
+#content_bottom{
+	text-align:center;
+	margin-top:5px;
+	border-top: 1px solid #CCCCCC;
+}
+
+/*-------------项目发布样式----------------------*/
+#projects #project_description center{
+	font-size:18px;
+	font-weight:bold;
+
+}
+
+#projects #project_description .label{
+	text-align:left;
+	font-size:15px;
+	padding:3px 3px 3px 3px;
+	margin:3px 3px 3px 3px;
+}
+
+#projects #project_description input select{
+	height:20px;
+}
+
+/*----------具体项目样式--------------------------*/
+#project{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:812px;
+	height:auto; 
+	float:left;
+	margin:2px 0px 2px 10px;
+	z-index:-2;
+	border: 1px solid #CCCCCC;
+	text-align:left;
+}
+
+
+#project .project_title {
+	height:auto;
+	font-size:20px;
+	text-align:center;
+	border-bottom: 1px dotted #CCCCCC;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+
+#project .tool_bar{
+	height:auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	text-align:center;
+	font-size:20px;
+}
+
+
+#project .project_content{
+	padding-left:40px;
+	padding-right:40px;
+}
+
+#project .tail{
+	padding-left:40px;
+}
+
+/*--------------中心项目管理----------*/
+
+#main{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:1024px;
+	height:602px; 
+	float:left;
+	margin:2px 0px 2px 2px;
+	z-index:-2;
+	text-align:left;
+}
+
+#main frame{
+	width:1024px;
+}
+/*-------------------------projects样式-------------*/
+
+#projects_a{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:1024px;
+	height:590px; 
+	float:left;
+	margin:2px 0px 2px 2px;
+	z-index:-2;
+	border: 1px solid #CCCCCC;
+	text-align:left;
+}
+
+/*-----------------------projects_top样式---------*/
+#projects_a #projects_top_a {
+	height:22px;
+	font-size:12px;
+	font-weight:600;
+	border-bottom: 1px solid #CCCCCC;
+}
+#projects_a #projects_top_a table tr td{
+	font-size:12px;
+	font-weight:600;
+	text-align:left;
+}
+
+/*------------项目列表样式----------------------*/
+#content_mid_a{
+	text-algin:left;
+	font-size:12px;
+}
+
+#content_mid_a table tr td{
+	font-size:12px;
+	text-align:left;
+}
+
+/*------------分页显示样式----------------------*/
+#content_bottom_a{
+	text-align:center;
+	margin-top:50px;
+	border-top: 1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+/*---------附件样式----------------------------*/
+#attachment{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:812px;
+	height:650px; 
+	float:left;
+	margin:2px 0px 2px 10px;
+	z-index:-2;
+	border: 1px solid #CCCCCC;
+	text-align:left;
+}
+#attachment .item_content{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#attachment .item_title{
+	border-bottom: 1px dotted #CCCCCC;
+	font-size:20px;
+	text-align:center;
+}
+
+#undertake{
+	border-top: 1px dotted #CCCCCC;
+	border-bottom: 1px dotted #CCCCCC;
+}
+
+#upload{
+	padding-top:10px;
+	font-size:15px;
+	
+}
+
+/*--------------------------------注册页样式-------------------------*/
+#userRegisterForm{
+	text-align:left;
+	font-size:15px;
+	width:756px;
+	height:650px; 
+	float:left;
+	margin:2px 0px 2px 2px;
+	z-index:-1;
+	border: 1px solid #CCCCCC;
+}
+#userRegisterForm form div{
+	margin-top:5px;
+}
+
+#userRegisterForm form div .regist_lable{
+	display:inline-block;
+	width:100px;
+	margin-left:100px;
+}
+#userRegisterForm form input{
+	width:150px;
+}
+#userRegisterForm form select{
+	width:145px;
+}
+#submit_reg{
+	margin-left:140px;
+}
+
+/*---------------------------------用户管理界面css样式------------------*/
+
+
+#users{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:950px;
+	float:left;
+	margin:2px 0px 2px 2px;
+	z-index:-2;
+	border: 1px solid #CCCCCC;
+	text-align:left;
+}
+
+#users #user_top {
+	height:22px;
+	font-size:12px;
+	font-weight:600;
+	border-bottom: 1px solid #CCCCCC;
+}
+#users #user_top table tr td{
+	font-size:12px;
+	font-weight:600;
+	text-align:left;
+}
+
+#user_mid{
+	text-algin:left;
+	font-size:12px;
+}
+
+#user_mid table tr td{
+	font-size:12px;
+	text-align:left;
+}
+
+//日历css
+
+.Calendar {
+
+	font-family:Verdana;
+
+	font-size:12px;
+
+	background-color:#e0ecf9;
+
+	text-align:center;
+
+	width:200px;
+
+	height:160px;
+
+	padding:10px;
+
+	line-height:1.5em;
+
+}
+
+.Calendar a{
+
+	color:#1e5494;
+
+}
+
+
+
+.Calendar table{
+
+	width:100%; 
+
+	border:0;
+
+}
+
+
+
+.Calendar table thead{color:#acacac;}
+
+
+
+.Calendar table td {
+
+	font-size: 11px;
+
+	padding:1px;
+
+}
+
+#idCalendarPre{
+
+	cursor:pointer;
+
+	float:left;
+
+	padding-right:5px;
+
+}
+
+#idCalendarNext{
+
+	cursor:pointer;
+
+	float:right;
+
+	padding-right:5px;
+
+}
+
+#idCalendar td.onToday {
+
+	font-weight:bold;
+
+	color:#C60;
+
+}
+
+#idCalendar td.onSelect {
+
+	font-weight:bold;
+
+}
+	

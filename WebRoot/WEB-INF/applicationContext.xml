@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- 数据源配置 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/usst4secompany_db??characterEncoding=GB2312">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="12345"></property>
+	</bean>
+	
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 数据源配置 -->
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<!-- hibernate 参数设置-->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				
+				<!-- c3p0数据库连接池配置 -->
+				<prop key="hibernate.c3p0.max_size">20</prop>
+				<prop key="hibernate.c3p0.min_size">5</prop>
+				<prop key="hibernate.c3p0.timeout">1000</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.idle_test_period">120</prop>
+				<prop key="hibernate.c3p0.acquire_increment">2</prop>
+				<prop key="hibernate.c3p0.validate">true</prop>
+				
+				<!-- 配置二级缓存 -->
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<!--开启查询缓存 -->
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				
+			</props>
+		</property>
+		
+		
+		<!--hibernate 映射文件  -->
+		<property name="mappingResources">
+			<list>
+				<value>
+					com/usstprojectmarket/vo/ProjectChanging.hbm.xml
+				</value>
+				<value>com/usstprojectmarket/vo/Admin.hbm.xml</value>
+				<value>
+					com/usstprojectmarket/vo/Student.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Company.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/School.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Professor.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/College.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Firstlist.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Secondlist.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Project.hbm.xml
+				</value>
+				<value>
+					com/usstprojectmarket/vo/Message.hbm.xml
+				</value>
+				
+				</list>
+		</property>
+	</bean>
+	
+	<!-- 向baseDao注入 session工厂-->
+	<bean id="baseDAO" class="com.usstprojectmarket.dao.BaseDAO" abstract="true">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	
+	<bean id="adminDao" class="com.usstprojectmarket.daoImpl.AdminDaoImpl" parent="baseDAO"></bean>
+	<bean id="collegeDao" class="com.usstprojectmarket.daoImpl.CollegeDaoImpl" parent="baseDAO"></bean>
+	<bean id="companyDao" class="com.usstprojectmarket.daoImpl.CompanyDaoImpl" parent="baseDAO"></bean>
+	<bean id="schoolDao" class="com.usstprojectmarket.daoImpl.SchoolDaoImpl" parent="baseDAO"></bean>
+	<bean id="studentDao" class="com.usstprojectmarket.daoImpl.StudentDaoImpl" parent="baseDAO"></bean>
+	<bean id="teacherDao" class="com.usstprojectmarket.daoImpl.TeacherDaoImpl" parent="baseDAO"></bean>
+	<bean id="projectDao" class="com.usstprojectmarket.daoImpl.ProjectDaoImpl" parent="baseDAO"></bean>
+	<bean id="firstListDao" class="com.usstprojectmarket.daoImpl.FirstlistDaoImpl" parent="baseDAO"></bean>
+	<bean id="secondListDao" class="com.usstprojectmarket.daoImpl.SecondlistDaoImpl" parent="baseDAO"></bean>
+	<bean id="projectChangeDao" class="com.usstprojectmarket.daoImpl.ProjectChangeDaoImpl" parent="baseDAO"></bean>
+	<bean id="messageDao" class="com.usstprojectmarket.daoImpl.MessageDaoImpl" parent="baseDAO"></bean>
+	
+	<!--service注入dao -->
+	<bean id="userService" class="com.usstprojectmarket.serviceImpl.UserServiceImpl">
+		<property name="schoolDao">
+			<ref bean="schoolDao"/>
+		</property>
+		<property name="collegeDao">
+			<ref bean="collegeDao"/>
+		</property>
+		<property name="companyDao">
+			<ref bean="companyDao"/>
+		</property>
+		<property name="studentDao">
+			<ref bean="studentDao"/>
+		</property>
+		<property name="teacherDao">
+			<ref bean="teacherDao"/>
+		</property>
+		<property name="adminDao">
+			<ref bean="adminDao"/>
+		</property>
+	</bean>
+	
+	<bean id="menuListService" class="com.usstprojectmarket.serviceImpl.MenuListServiceImpl">
+		<property name="secondListDao">
+			<ref bean="secondListDao"/>
+		</property>
+		<property name="firstListDao">
+			<ref bean="firstListDao"/>
+		</property>
+	</bean>
+	
+	<bean id="projectService" class="com.usstprojectmarket.serviceImpl.ProjectServiceImpl">
+		<property name="projectDao">
+			<ref bean="projectDao"/>
+		</property>
+	</bean>
+	
+	<bean id="messageService" class="com.usstprojectmarket.serviceImpl.MessageServiceImpl">
+		<property name="messageDao">
+			<ref bean="messageDao"/>
+		</property>
+	</bean>
+	
+	<bean id="projectChangeService" class="com.usstprojectmarket.serviceImpl.ProjectChangeServiceImpl">
+			<property name="projectChangeDao">
+			<ref bean="projectChangeDao"/>
+		</property>
+	</bean>
+	
+	<!-- 向action注入 service -->
+	<bean id="userRegisterAction" class="com.usstprojectmarket.action.UserRegisterAction" scope="prototype">
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	<bean id="userLoginAction" class="com.usstprojectmarket.action.UserLoginAction" scope="prototype">
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+		<property name="messageService">
+			<ref bean="messageService"/>
+		</property>
+	</bean>
+	
+	<bean id="userLogoutAction" class="com.usstprojectmarket.action.UserLogoutAction" scope="prototype"></bean>
+	
+	<bean id="getMenuListAction" class="com.usstprojectmarket.action.GetMenuListAction" scope="prototype">
+		<property name="menuListService">
+			<ref bean="menuListService"/>
+		</property>
+	</bean>
+	
+	<bean id="projectAction" class="com.usstprojectmarket.action.ProjectAction" scope="prototype">
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+		<property name="menuListService">
+			<ref bean="menuListService"/>
+		</property>
+		<property name="projectChangeService">
+			<ref bean="projectChangeService"/>
+		</property>
+	</bean>
+	
+	<bean id="voteAction" class="com.usstprojectmarket.action.VoteAction" scope="prototype">
+		<property name="projectChangeService">
+			<ref bean="projectChangeService"/>
+		</property>
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+	</bean>
+	
+	<bean id="projectManageAction" class="com.usstprojectmarket.action.ProjectManageAction" scope="prototype">
+		<property name="projectChangeService">
+			<ref bean="projectChangeService"/>
+		</property>
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	<bean id="adminAction" class="com.usstprojectmarket.action.AdminAction" scope="prototype">
+		
+	</bean>
+	
+	<bean id="upload" class="com.usstprojectmarket.action.FileUploadAction" scope="prototype">
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+	</bean>
+	
+	<bean id="userAction" class="com.usstprojectmarket.action.UserAction" scope="prototype">
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	<bean id="userManageAction" class="com.usstprojectmarket.action.UserManageAction" scope="prototype">
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	
+	<bean id="homeAction" class="com.usstprojectmarket.action.HomeAction" scope="prototype">
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+		<property name="userService">
+			<ref bean="userService"/>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 向拦截器注入service -->
+	<bean id="projectRelationCheckerInterceptor" class="com.usstprojectmarket.filter.ProjectRelationCheckerInterceptor">
+		<property name="projectService">
+			<ref bean="projectService"/>
+		</property>
+	</bean>
+</beans>

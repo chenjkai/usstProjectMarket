@@ -1,0 +1,80 @@
+@CHARSET "UTF-8";
+/*--------------------------总体布局----------------------*/
+#user_info{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:812px;
+	height:auto; 
+	float:left;
+	margin:2px 0px 2px 12px;
+	z-index:-2;
+	text-align:left;
+}
+
+#user_info .user_photo{
+	width:200px;
+	height:200px;
+	border: 1px solid #CCCCCC;
+	float:left;
+}
+
+#user_info .user_simaple_info{
+	width:610px;
+	height:202px;
+	float:left;
+
+}
+
+#user_info .user_simaple_info .info_item{
+	width:560px;
+	height:20px;
+	font-size:15px;
+	padding-left:30px;
+}
+
+#user_info .user_simaple_info .name{
+	font-size:20px;
+	font-weight:bold;
+	margin-left:20px;
+}
+
+#user_info .user_simaple_info .info_item .modify_info{
+	font-size:12px;
+	float:right;
+	padding-right:30px;
+}
+
+#user_info .user_simaple_info .border{
+	width:588px;
+	height:auto;
+	border: 1px solid #CCCCCC;
+	margin-left:20px;
+	background-color:#FFE1FF;
+	padding-top:9px;
+	padding-bottom:9px;
+}
+#user_info .user_introduction{
+	width:810px;
+	height:auto; 
+	margin:5px 0px 5px 0px;
+	border: 1px dotted #CCCCCC;
+	float:left;
+}
+
+/*-------------------------------------修改资料页面------------------------------------------------------*/
+#modify{
+	background-color:white;
+	text-align:center;
+	font-size:12px;
+	width:810px;
+	height:auto; 
+	float:left;
+	margin:2px 0px 2px 12px;
+	z-index:-2;
+	text-align:left;
+	border: 1px solid #CCCCCC;
+	float:left;
+}
+	
+
